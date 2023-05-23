@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: OCR A Std, monospace;
+        }
+        h1 {
+            font-weight: 900;
+            padding-top: 150px;
+            font-size: 64px;
+        }
+        p {
+            font-size: 16px;
+        }
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #answer {
+            font-family: OCR A Std, monospace;
+        }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-top: 322px solid transparent;
+            border-right: 322px solid #332424;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotate(180deg);
+        }
+        .triangle_right {
+            width: 0;
+            height: 0;
+            border-top: 322px solid transparent;
+            border-right: 322px solid #332424;
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: rotate(270deg);
+        }
+        h5 {
+            color: grey;
+        }
+        #question {
+            height: 50px;
+            transition: transform 0.1s ease-in-out;
+            width: 1024px;
+        }
+        .form-group label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transition: width 0.5s ease-in-out;
+            pointer-events: none;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+        }
+        .form-group input:focus {
+            transform: translateX(+10px);
+        }
+        button.btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button.btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+    </style>
+    <title>MarisCHAD: a CV chatbot</title>
+    <script>
+        // JavaScript code to add that cool typing effect
+
+        // Event listener for when the DOM content has been loaded
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+            // Get the answer element
+            var answerElement = document.getElementById("answer");
+            var answerText = answerElement.innerHTML;
+
+            // Clear the answer text
+            answerElement.innerHTML = "";
+
+            var index = 0; // Initialize the index to track the current character
+            var typingSpeed = 20; // Adjust typing speed (in milliseconds)
+
+            function typeNextCharacter() {
+                // If there are still characters remaining to be typed
+                if (index < answerText.length) {
+
+
+                    // Append the next character to the answer element
+                    answerElement.innerHTML += answerText.charAt(index);
+
+                    index++; // Increment the index to move to the next character
+
+                    // Set a timeout to type the next character after the specified typing speed
+                    setTimeout(typeNextCharacter, typingSpeed);
+                }
+            }
+            // Start the typing effect by calling the function
+            typeNextCharacter();
+        });
+    </script>
+</head>
+<body>
+<div class="triangle"></div>
+<div class="triangle_right"></div>
+<div class="container">
+    <div class="logo-container">
+        <a href="https://github.com/maris435" target="_blank">
+            <img src="{{ url_for('static', filename='logo6.png') }}" alt="Logo" class="img-fluid" style="max-width: 156px;">
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <h1 class="mt-4 mb-4" >MarisCHAD 1.0</h1>
+    <h5 class="mt-4 mb-4 ">
+        A Coherent-Honest-Answer-Determining Bot
+    </h5>
+    <h4 class="mt-4 mb-4">
+        CHAD knows everything you'd want to know as an employer about Maris
+    </h4>
+    <form action="/" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group mb-4" >
+            <input type="text" id="question" name="question"
+                   placeholder="What would you like to know about me?" required>
+        </div>
+        <button
+                type="submit" class="btn btn-dark">Ask
+        </button>
+    </form>
+</div>
+
+<div id="response" class="container">
+    {% if answer %}
+    <h3 class="mt-4 mb-4" >Response:</h3>
+    <p id="answer" class="mt-4 mb-4">{{ answer }}</p>
+    {% endif %}
+</div>
+</body>
+<footer style="position: fixed; bottom: 0; width: 100%;">
+    <div class="container" style="text-align: right;">
+        <a href="privacy_policy" target="_blank">
+            <button type="button" class="btn btn-transparent">Privacy Policy</button>
+        </a>
+    </div>
+</footer>
+</html>
