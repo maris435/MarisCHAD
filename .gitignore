@@ -1,6 +1,4 @@
-/venv/
+venv
 config.py
 .idea
 my_resume.pdf
-static/logo_concepts
-instance
