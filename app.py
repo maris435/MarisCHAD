@@ -2,7 +2,6 @@ import config
 from flask import Flask, request, render_template
 from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
-
 from datetime import date
 
 from chatbot import chatbot
