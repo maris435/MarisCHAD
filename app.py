@@ -13,21 +13,21 @@ csrf = CSRFProtect()
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
+# app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
 app.config['SECRET_KEY'] = config.APP_SECRET_KEY
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 csrf.init_app(app)
 
 # Initialize the tables to be added to a database
-class Session(db.Model):
-    session_id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date)
-
-class Conversation(db.Model):
-    question_id = db.Column(db.Integer, primary_key=True)
-    session_id = db.Column(db.Integer, db.ForeignKey('session.session_id'))
-    question = db.Column(db.String(1024))
-    answer = db.Column(db.String(1024))
+# class Session(db.Model):
+#     session_id = db.Column(db.Integer, primary_key=True)
+#     date = db.Column(db.Date)
+#
+# class Conversation(db.Model):
+#     question_id = db.Column(db.Integer, primary_key=True)
+#     session_id = db.Column(db.Integer, db.ForeignKey('session.session_id'))
+#     question = db.Column(db.String(1024))
+#     answer = db.Column(db.String(1024))
 
 # Routing the homepage
 @app.route("/", methods=["GET", "POST"])
@@ -49,18 +49,18 @@ def ask_question():
             # Get the latest session
             session = Session.query.order_by(Session.session_id.desc()).first()
 
-            # Check if a new session needs to be created- if id does, add to database
-            if session is None or session.date != date.today():
-                session = Session(date=date.today())
-                db.session.add(session)
-                db.session.commit()
-
-            # Create a new conversation entry with the session, question, and response
-            conversation = Conversation(session_id=session.session_id, question=question, answer=response)
-
-            # Add the conversation to the database session, commit changes
-            db.session.add(conversation)
-            db.session.commit()
+            # # Check if a new session needs to be created- if id does, add to database
+            # if session is None or session.date != date.today():
+            #     session = Session(date=date.today())
+            #     db.session.add(session)
+            #     db.session.commit()
+            #
+            # # Create a new conversation entry with the session, question, and response
+            # conversation = Conversation(session_id=session.session_id, question=question, answer=response)
+            #
+            # # Add the conversation to the database session, commit changes
+            # db.session.add(conversation)
+            # db.session.commit()
 
             # Render the template with the response
             return render_template("index.html", answer=response)
