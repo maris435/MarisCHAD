@@ -12,11 +12,11 @@ import os
 
 def chatbot():
     # Initialize components
-    os.environ["OPENAI_API_KEY"] = S3Connection(os.environ['OPENAI_API_KEY'], os.environ['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'])
+    os.environ["OPENAI_API_KEY"] = str(S3Connection(os.environ['OPENAI_API_KEY'], os.environ['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']))
     embeddings = OpenAIEmbeddings()
     index_name = "me-database"
-    pinecone.init(api_key= S3Connection(os.environ['PINECONE_API_KEY'], os.environ['sk-5c877f11-4d28-4075-8938-d6e11d0da90d']),
-                  environment=S3Connection(os.environ['PINECONE_REGION'], os.environ['us-east-1-aws']))
+    pinecone.init(api_key= str(S3Connection(os.environ['PINECONE_API_KEY'], os.environ['sk-5c877f11-4d28-4075-8938-d6e11d0da90d'])),
+                  environment=str(S3Connection(os.environ['PINECONE_REGION'], os.environ['us-east-1-aws'])))
 
     # Create a Pinecone index for document search
     docsearch = Pinecone.from_existing_index(index_name, embeddings)
