@@ -10,16 +10,16 @@
         }
         h1 {
             font-weight: 900;
-            padding-top: 150px;
-            font-size: 64px;
+            padding-top: 10%;
+            font-size: 4vw;
         }
         p {
-            font-size: 16px;
+            font-size: 1em;
         }
         .logo-container {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 1%;
+            right: 1%;
         }
         #answer {
             font-family: OCR A Std, monospace;
@@ -27,8 +27,8 @@
         .triangle {
             width: 0;
             height: 0;
-            border-top: 270px solid transparent;
-            border-right: 270px solid #332424;
+            border-top: 15vw solid transparent;
+            border-right: 15vw solid #332424;
             position: absolute;
             top: 0;
             left: 0;
@@ -37,8 +37,8 @@
         .triangle_right {
             width: 0;
             height: 0;
-            border-top: 275px solid transparent;
-            border-right: 275px solid #332424;
+            border-top: 15vw solid transparent;
+            border-right: 15vw solid #332424;
             position: absolute;
             top: 0;
             right: 0;
@@ -48,14 +48,14 @@
             color: grey;
         }
         #question {
-            height: 50px;
+            height: 5vw;
             transition: transform 0.1s ease-in-out;
-            width: 1024px;
+            width: 60vw;
         }
         .form-group label {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 1%;
+            left: 1%;
             transition: width 0.5s ease-in-out;
             pointer-events: none;
             white-space: nowrap;
@@ -63,11 +63,11 @@
             width: 0;
         }
         .form-group input:focus {
-            transform: translateX(+10px);
+            transform: translateX(+1%);
         }
         button.btn {
-            font-size: 18px;
-            padding: 10px 20px;
+            font-size: 1.5em;
+            padding: 1vw 2vw;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -75,8 +75,6 @@
             transform: scale(1.05);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
-
-
     </style>
     <title>MarisCHAD: a CV chatbot</title>
     <script>
@@ -120,14 +118,14 @@
 <div class="container">
     <div class="logo-container">
         <a href="https://github.com/maris435" target="_blank">
-            <img src="{{ url_for('static', filename='logo6.png') }}" alt="Logo" class="img-fluid" style="max-width: 128px;">
+            <img src="{{ url_for('static', filename='logo6.png') }}" alt="Logo" class="img-fluid" style="max-width: 10vw;">
         </a>
     </div>
 </div>
 
 <div class="container">
-    <h1 class="mt-4 mb-4" >MarisCHAD 1.0</h1>
-    <h5 class="mt-4 mb-4 ">
+    <h1 class="mt-4 mb-4">MarisCHAD 1.0</h1>
+    <h5 class="mt-4 mb-4">
         A Coherent-Honest-Answer-Determining Bot
     </h5>
     <h4 class="mt-4 mb-4">
@@ -135,7 +133,7 @@
     </h4>
     <form action="/" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <div class="form-group mb-4" >
+        <div class="form-group mb-4">
             <input type="text" id="question" name="question"
                    placeholder="What would you like to know about me?" required>
         </div>
@@ -147,7 +145,7 @@
 
 <div id="response" class="container">
     {% if answer %}
-    <h3 class="mt-4 mb-4" >Response:</h3>
+    <h3 class="mt-4 mb-4">Response:</h3>
     <p id="answer" class="mt-4 mb-4">{{ answer }}</p>
     {% endif %}
 </div>
@@ -160,4 +158,3 @@
     </div>
 </footer>
 </html>
-
