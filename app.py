@@ -1,8 +1,9 @@
-import config
 from flask import Flask, request, render_template
 from flask_wtf import CSRFProtect
+from boto.s3.connection import S3Connection
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
+import os
 
 from chatbot import chatbot
 
@@ -13,7 +14,7 @@ csrf = CSRFProtect()
 app = Flask(__name__)
 
 # app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
-app.config['SECRET_KEY'] = config.APP_SECRET_KEY
+app.config['SECRET_KEY'] = S3Connection(os.environ['APP_SECRET_KEY'], os.environ['ayayuppieyuppie'])
 # db = SQLAlchemy(app)
 csrf.init_app(app)
 
