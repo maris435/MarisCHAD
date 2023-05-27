@@ -1,22 +1,22 @@
-# import config
+import os
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.agents import initialize_agent, Tool, AgentType
 from langchain.chains import RetrievalQA
 from langchain.memory import ConversationBufferMemory
 from langchain import OpenAI
-from boto.s3.connection import S3Connection
 import pinecone
-import os
 
 
 def chatbot():
     # Initialize components
-    os.environ["OPENAI_API_KEY"] = str(S3Connection(os.environ['OPENAI_API_KEY'], os.environ['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']))
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    pinecone_api_key = os.getenv("PINECONE_API_KEY")
+    pinecone_region = os.getenv("PINECONE_REGION")
+
     embeddings = OpenAIEmbeddings()
     index_name = "me-database"
-    pinecone.init(api_key= str(S3Connection(os.environ['PINECONE_API_KEY'], os.environ['sk-5c877f11-4d28-4075-8938-d6e11d0da90d'])),
-                  environment=str(S3Connection(os.environ['PINECONE_REGION'], os.environ['us-east-1-aws'])))
+    pinecone.init(api_key=pinecone_api_key, environment=pinecone_region)
 
     # Create a Pinecone index for document search
     docsearch = Pinecone.from_existing_index(index_name, embeddings)
