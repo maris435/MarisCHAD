@@ -27,8 +27,8 @@
         .triangle {
             width: 0;
             height: 0;
-            border-top: 15vw solid transparent;
-            border-right: 15vw solid #332424;
+            border-top: 20vw solid transparent;
+            border-right: 20vw solid #332424;
             position: absolute;
             top: 0;
             left: 0;
@@ -37,8 +37,8 @@
         .triangle_right {
             width: 0;
             height: 0;
-            border-top: 15vw solid transparent;
-            border-right: 15vw solid #332424;
+            border-top: 20vw solid transparent;
+            border-right: 20vw solid #332424;
             position: absolute;
             top: 0;
             right: 0;
@@ -74,6 +74,23 @@
         button.btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                padding-top: 20%;
+                font-size: 7vw;
+            }
+            #question {
+                width: 75vw;
+
+            }
+            #question::placeholder {
+                font-size: 0.5em;
+            }
+            .form-group label {
+                width: auto;
+            }
         }
     </style>
     <title>MarisCHAD: a CV chatbot</title>

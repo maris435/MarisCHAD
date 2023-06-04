@@ -6,15 +6,16 @@ from langchain.document_loaders import PyPDFLoader
 import pinecone
 
 # Load the resume document using PyPDFLoader
-loader = PyPDFLoader('my_resume.pdf')
+loader = PyPDFLoader('reviewed_resume.pdf')
 
 pages = loader.load()
 
 # Initialize text splitter for splitting document into chunks
 text_splitter = CharacterTextSplitter(chunk_size=50, chunk_overlap=10)
 
+
 # Initialize OpenAI embeddings
-embeddings = OpenAIEmbeddings()
+embeddings = OpenAIEmbeddings(openai_api_key=config.OPENAI_API_KEY)
 
 # Define an index name and initialize Pinecone with API key and environment
 
